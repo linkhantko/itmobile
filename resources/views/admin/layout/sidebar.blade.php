@@ -8,6 +8,12 @@
                 <i class="bi bi-grid"></i>
                 <span>Brand</span>
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/category') }}">
+                <i class="bi bi-grid"></i>
+                <span>Category</span>
+            </a>
         </li><!-- End Dashboard Nav -->
     </ul>
 
