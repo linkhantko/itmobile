@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Student-Regirstation-System</title>
+    <title>IT and Mobile Store</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -54,7 +54,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="/admin/dashboard" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block">Drean Academy</span>
+                <span class="d-none d-lg-block">Store</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
