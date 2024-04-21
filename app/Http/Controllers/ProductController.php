@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +17,16 @@ class ProductController extends Controller
     {
         $product = new Product();
         $products = Product::where('status', true)->get();
-        return view('admin.product.index', compact('product', 'products'));
+
+        $brand = new Brand();
+        $brands = Brand::all();
+
+        $category = new Category();
+        $categories = Category::all();
+
+        $supplier = new Supplier();
+        $suppliers = Supplier::all();
+        return view('admin.product.index', compact('product', 'products', 'brand', 'brands', 'category', 'categories', 'supplier', 'suppliers'));
     }
 
     /**
@@ -30,7 +42,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        $request->validate([
+        'name' => 'required',
+        'brand' => 'required',
+        'category' => 'required',
+        'supplier' => 'required',
+        'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the photo
+    ]);
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->supplier = $request->supplier;
+
+    if ($request->hasFile('photo')) {
+        $photo = $request->file('photo');
+        $photoName = time() . '.' . $photo->getClientOriginalExtension();
+        $photo->storeAs('public/photos', $photoName);
+        $product->photo_path = 'storage/photos/' . $photoName;
+    }
+    dd($product);
+    $product->save();
+
+    return view('admin.product.index')->with('success', 'Product created successfully.');
     }
 
     /**

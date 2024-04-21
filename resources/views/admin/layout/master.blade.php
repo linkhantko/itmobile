@@ -8,12 +8,6 @@
     <title>IT and Mobile Store</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
-    {{-- Select2 (For multi select) --}}
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('Academic/css/select2.css') }}">
-
-
     <!-- Favicons -->
     <link href="{{ asset('NiceAdmin/assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('NickeAdmin/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -32,8 +26,6 @@
     <link href="{{ asset('NiceAdmin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('NiceAdmin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('NiceAdmin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('dataTable/css/jquery.dataTable.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dataTable/css/buttons.dataTables.min.css') }}">
     <!-- Template Main CSS File -->
     <link href="{{ asset('NiceAdmin/assets/css/style.css') }}" rel="stylesheet">
 
@@ -171,16 +163,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('NiceAdmin/assets/js/main.js') }}"></script>
-
-    <!-- Datatable  -->
-    <script src="{{ asset('dataTable/js/jquery-3.7.0.js') }}"></script>
-    <script src="{{ asset('dataTable/js/jquery.dataTables.mis.js') }}"></script>
-    <script src="{{ asset('dataTable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('dataTable/js/jszip.min.js') }}"></script>
-    <script src="{{ asset('dataTable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('dataTable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('dataTable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('dataTable/js/buttons.print.min.js') }}"></script>
 </body>
 
 </html>
