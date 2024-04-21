@@ -14,7 +14,14 @@
                 <i class="bi bi-grid"></i>
                 <span>Category</span>
             </a>
-        </li><!-- End Dashboard Nav -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/supplier') }}">
+                <i class="bi bi-grid"></i>
+                <span>Supplier</span>
+            </a>
+        </li>
+        <!-- End Dashboard Nav -->
     </ul>
 
 </aside><!-- End Sidebar-->

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin/brand', BrandController::class);
 
     Route::resource('admin/category', CategoryController::class);
+
+    Route::resource('admin/supplier', SupplierController::class);
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
