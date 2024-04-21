@@ -21,6 +21,12 @@
                 <span>Supplier</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/product') }}">
+                <i class="bi bi-grid"></i>
+                <span>Product</span>
+            </a>
+        </li>
         <!-- End Dashboard Nav -->
     </ul>
 
