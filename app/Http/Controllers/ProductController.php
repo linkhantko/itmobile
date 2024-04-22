@@ -7,12 +7,10 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $product = new Product();
@@ -29,75 +27,92 @@ class ProductController extends Controller
         return view('admin.product.index', compact('product', 'products', 'brand', 'brands', 'category', 'categories', 'supplier', 'suppliers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate([
-        'name' => 'required',
-        'brand' => 'required',
-        'category' => 'required',
-        'supplier' => 'required',
-        'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the photo
-    ]);
+            'name' => 'required',
+            'brand_id' => 'required',
+            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'price' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate the photo
+        ]);
 
         $product = new Product();
         $product->name = $request->name;
-        $product->brand = $request->brand;
-        $product->category = $request->category;
-        $product->supplier = $request->supplier;
+        $product->brand_id = $request->brand_id;
+        $product->category_id = $request->category_id;
+        $product->supplier_id = $request->supplier_id;
+        $product->price = $request->price;
 
-    if ($request->hasFile('photo')) {
-        $photo = $request->file('photo');
-        $photoName = time() . '.' . $photo->getClientOriginalExtension();
-        $photo->storeAs('public/photos', $photoName);
-        $product->photo_path = 'storage/photos/' . $photoName;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '.' . $photo->getClientOriginalName();
+            $photo->storeAs('/public/photos', $photoName);
+            // $product->photo = 'storage/photos/' . $photoName;
+            $product->photo = $photoName;
+        }
+
+        $product->save();
+
+        return redirect('/admin/product')->with('success', 'Product created successfully.');
     }
-    dd($product);
-    $product->save();
 
-    return view('admin.product.index')->with('success', 'Product created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        $products = Product::where('status', true)->get();
+
+        $brand = new Brand();
+        $brands = Brand::all();
+
+        $category = new Category();
+        $categories = Category::all();
+
+        $supplier = new Supplier();
+        $suppliers = Supplier::all();
+        return view('admin.product.index', compact('product', 'products', 'brand', 'brands', 'category', 'categories', 'supplier', 'suppliers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'brand_id' => 'required',
+            'category_id' => 'required',
+            'supplier_id' => 'required',
+            'price' => 'required',
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->brand_id = $request->brand_id;
+        $product->category_id = $request->category_id;
+        $product->supplier_id = $request->supplier_id;
+        $product->price = $request->price;
+        $product->update();
+
+        return redirect('/admin/product')->with('updated', 'Product created successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $product = Product::find($id);
+        // if ($product->photo) {
+        //     Storage::delete('/public/photos/' . $product->photo);
+        // }
+        Storage::delete('/public/photos/' . $product->photo);
+        $product->delete();
+        return redirect('/admin/product')->with('deleted', 'Product deleted successfully.');
     }
 }
