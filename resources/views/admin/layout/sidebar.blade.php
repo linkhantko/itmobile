@@ -27,6 +27,12 @@
                 <span>Product</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/order') }}">
+                <i class="bi bi-grid"></i>
+                <span>Order</span>
+            </a>
+        </li>
         <!-- End Dashboard Nav -->
     </ul>
 
