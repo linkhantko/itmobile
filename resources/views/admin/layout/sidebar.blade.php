@@ -33,6 +33,24 @@
                 <span>Order</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/user') }}">
+                <i class="bi bi-grid"></i>
+                <span>User</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/role') }}">
+                <i class="bi bi-grid"></i>
+                <span>Role</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/permission') }}">
+                <i class="bi bi-grid"></i>
+                <span>Permission</span>
+            </a>
+        </li>
         <!-- End Dashboard Nav -->
     </ul>
 
