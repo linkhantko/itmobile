@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/user', [UserController::class, 'index']);
     Route::get('/admin/user/{id}/edit', [UserController::class, 'edit']);
     Route::patch('/admin/user/{id}', [UserController::class, 'update']);
+
+    Route::post('cart', [CartController::class, 'store']);
+    Route::delete('cart/{id}', [CartController::class, 'destroy']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

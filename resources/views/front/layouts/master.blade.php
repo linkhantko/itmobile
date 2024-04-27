@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Ogani</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -112,7 +112,42 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                                @if (auth()->user())
+                                    <div class="d-flex">
+                                        <div class="dropdown p-1">
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ auth()->user()->name }}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <form action="{{ route('logout') }}" method="post">
+                                                        @csrf
+                                                        <button class="dropdown-item"
+                                                            onclick="return confirm('Are you sure you want to logout?')">Logout</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown p-1">
+                                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                @foreach ($carts as $cart)
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                            href="#">{{ $cart->product->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @else
+                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -123,7 +158,8 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}" alt=""></a>
+                        <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}"
+                                alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -164,7 +200,7 @@
                         </div>
                         <ul>
                             @foreach ($brands as $brand)
-                            <li><a href="{{$brand->id}}">{{$brand->name}}</a></li>
+                                <li><a href="{{ $brand->id }}">{{ $brand->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -210,31 +246,25 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('ogani-master/img/categories/cat-1.jpg') }}">
-                            <h5><a href="#">Fresh Fruit</a></h5>
+                    {{-- @php
+                        $photos = ['cat-1.jpg', 'cat-2.jpg', 'cat-3.jpg', 'cat-4.jpg', 'cat-4.jpg'];
+                    @endphp
+                    @foreach ($categories as $index => $category)
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg"
+                                data-setbg="{{ asset('ogani-master/img/categories/' . $photos[$index % count($imageFilenames)]) }}">
+                                <h5><a href="#">{{ $category->name }}</a></h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('ogani-master/img/categories/cat-2.jpg') }}">
-                            <h5><a href="#">Dried Fruit</a></h5>
+                    @endforeach --}}
+                    @foreach ($categories as $category)
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg"
+                                data-setbg="{{ asset('ogani-master/img/categories/cat-1.jpg') }}">
+                                <h5><a href="#">{{ $category->name }}</a></h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('ogani-master/img/categories/cat-3.jpg') }}">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('ogani-master/img/categories/cat-4.jpg') }}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ asset('ogani-master/img/categories/cat-5.jpg') }}">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -252,27 +282,48 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
+                            @foreach ($categories as $category)
+                                <li data-filter=".{{ $category->name }}">{{ $category->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{ asset('ogani-master/img/featured/feature-1.jpg') }}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                @foreach ($products as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $product->category->name }} fresh-meat">
+                        <div class="featured__item">
+                            <form action="{{ url('cart') }}" method="POST"
+                                id="add-to-cart-form-{{ $product->id }}">
+                                @csrf
+                                <div class="featured__item__pic set-bg"
+                                    data-setbg="{{ asset('/storage/photos/' . $product->photo) }}">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        @foreach (auth()->user()->carts as $cart)
+                                            {{-- I use 1 because I use mysql. If  you use pgsql, it will be true --}}
+                                            @if ($cart->status === 1 && $cart->product_id === $product->id)
+                                            @else
+                                                <li>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault(); document.getElementById('add-to-cart-form-{{ $product->id }}').submit();">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <h6><a href="#">{{ $product->name }}</a></h6>
+                                    <h5>${{ $product->price }}</h5>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -366,7 +417,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}" alt=""></a>
+                            <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}"
+                                    alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>
@@ -427,7 +479,8 @@
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             </p>
                         </div>
-                        <div class="footer__copyright__payment"><img src="{{ asset('ogani-master/img/payment-item.png') }}" alt=""></div>
+                        <div class="footer__copyright__payment"><img
+                                src="{{ asset('ogani-master/img/payment-item.png') }}" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -438,6 +491,7 @@
     <!-- Js Plugins -->
     <script src="{{ asset('ogani-master/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('ogani-master/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ogani-master/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('ogani-master/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('ogani-master/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('ogani-master/js/jquery.slicknav.js') }}"></script>
