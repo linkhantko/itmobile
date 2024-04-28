@@ -34,6 +34,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('admin/blog') }}">
+                <i class="bi bi-grid"></i>
+                <span>Blog</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ url('admin/user') }}">
                 <i class="bi bi-grid"></i>
                 <span>User</span>
