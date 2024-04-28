@@ -30,8 +30,12 @@ class IndexController extends Controller
     {
         $brands = Brand::all();
         $categories = Category::all();
-        $products = Product::all();
-        $carts = Cart::all();
+        $products = Product::where('status', true)->get();
+
+        $carts = null;
+        if (auth()->check()) {
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+        }
         return view('front.home.contact', compact('brands', 'categories', 'products', 'carts'));
     }
 
@@ -40,7 +44,24 @@ class IndexController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $products = Product::where('status', true)->get();
-        $carts = Cart::all();
+
+        $carts = null;
+        if (auth()->check()) {
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+        }
         return view('front.home.shop', compact('brands', 'categories', 'products', 'carts'));
+    }
+
+    public function blog()
+    {
+        $brands = Brand::all();
+        $categories = Category::all();
+        $products = Product::where('status', true)->get();
+
+        $carts = null;
+        if (auth()->check()) {
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+        }
+        return view('front.home.blog', compact('brands', 'categories', 'products', 'carts'));
     }
 }

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index'])->name('front.index');
 Route::get('/contact', [IndexController::class, 'contact']);
 Route::get('/shop', [IndexController::class, 'shop']);
+Route::get('/blog', [IndexController::class, 'blog']);
 
 Route::post('cart', [CartController::class, 'store']);
 Route::delete('cart/{id}', [CartController::class, 'destroy']);
