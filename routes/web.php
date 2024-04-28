@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,8 @@ Route::get('/blog', [IndexController::class, 'blog']);
 Route::post('cart', [CartController::class, 'store']);
 Route::delete('cart/{id}', [CartController::class, 'destroy']);
 
+Route::get('checkout', [IndexController::class, 'checkout']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,7 +40,8 @@ Route::middleware(['auth', 'permission:back'])->group(function () {
     Route::resource('admin/supplier', SupplierController::class);
 
     Route::resource('admin/product', ProductController::class);
-
+    Route::resource('admin/order', OrderController::class);
+    
     Route::get('admin/permission', [PermissionController::class, 'index']);
     Route::post('admin/permission', [PermissionController::class, 'store']);
     Route::get('/admin/permission/{id}/edit', [PermissionController::class, 'edit']);

@@ -138,11 +138,9 @@
                                                     </li>
                                                 @endforeach
                                                 <li class="my-1">
-                                                    <div class="dropdown-item d-flex align-items-center">
-                                                        <a href="#" class="mx-2 text-primary">
-                                                            Checkout
-                                                        </a>
-                                                    </div>
+                                                    <a href="checkout" class="mx-2 btn btn-danger text-white">
+                                                        Checkout
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>

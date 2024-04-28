@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -63,5 +65,23 @@ class IndexController extends Controller
             $carts = Cart::where('user_id', auth()->user()->id)->get();
         }
         return view('front.home.blog', compact('brands', 'categories', 'products', 'carts'));
+    }
+
+    public function checkout()
+    {
+        $items = Cart::where('user_id', auth()->user()->id)->where('status', 1)->get();
+
+            foreach ($items as $item) {
+                Order::create([
+                    'user_id' => $item->user_id,
+                    'product_id' => $item->product_id,
+                    'status' => 1,
+                ]);
+            }
+
+            // Once all orders are created, you can clear the cart
+            Cart::where('user_id', auth()->user()->id)->where('status', 1)->delete();
+
+            return back();
     }
 }
