@@ -15,7 +15,7 @@ class IndexController extends Controller
     {
         $brands = Brand::all();
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::where('status', true)->get();
         $carts = Cart::all();
 
         return view('front.home.index', compact('brands', 'categories', 'products', 'carts'));
@@ -28,5 +28,14 @@ class IndexController extends Controller
         $products = Product::all();
         $carts = Cart::all();
         return view('front.home.contact', compact('brands', 'categories', 'products', 'carts'));
+    }
+
+    public function shop()
+    {
+        $brands = Brand::all();
+        $categories = Category::all();
+        $products = Product::where('status', true)->get();
+        $carts = Cart::all();
+        return view('front.home.shop', compact('brands', 'categories', 'products', 'carts'));
     }
 }

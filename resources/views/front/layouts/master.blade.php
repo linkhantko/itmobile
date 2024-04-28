@@ -158,7 +158,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="./shop">Shop</a></li>
                             <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact">Contact</a></li>
                         </ul>
