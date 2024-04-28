@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Front\CartController;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index'])->name('front.index');
 Route::get('/contact', [IndexController::class, 'contact']);
 Route::get('/shop', [IndexController::class, 'shop']);
-Route::get('/blog', [IndexController::class, 'blog']);
+Route::get('/blog-detail/{id}', [IndexController::class, 'blog']);
 
 Route::post('cart', [CartController::class, 'store']);
 Route::delete('cart/{id}', [CartController::class, 'destroy']);
@@ -42,6 +43,9 @@ Route::middleware(['auth', 'permission:back'])->group(function () {
     Route::resource('admin/product', ProductController::class);
     Route::resource('admin/order', OrderController::class);
     
+
+    Route::resource('admin/blog', BlogController::class);
+
     Route::get('admin/permission', [PermissionController::class, 'index']);
     Route::post('admin/permission', [PermissionController::class, 'store']);
     Route::get('/admin/permission/{id}/edit', [PermissionController::class, 'edit']);

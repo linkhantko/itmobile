@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\ProductController;
+use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
@@ -18,13 +18,14 @@ class IndexController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $products = Product::where('status', true)->get();
+        $blogs = Blog::all();
 
         $carts = null;
         if (auth()->check()) {
             $carts = Cart::where('user_id', auth()->user()->id)->get();
         }
 
-        return view('front.home.index', compact('brands', 'categories', 'products', 'carts'));
+        return view('front.home.index', compact('brands', 'categories', 'products', 'blogs', 'carts'));
     }
 
 
@@ -54,17 +55,20 @@ class IndexController extends Controller
         return view('front.home.shop', compact('brands', 'categories', 'products', 'carts'));
     }
 
-    public function blog()
+    public function blog(string $id)
     {
         $brands = Brand::all();
         $categories = Category::all();
         $products = Product::where('status', true)->get();
+        $blogs = Blog::all();
+        $blog = Blog::find($id);
 
         $carts = null;
         if (auth()->check()) {
             $carts = Cart::where('user_id', auth()->user()->id)->get();
         }
-        return view('front.home.blog', compact('brands', 'categories', 'products', 'carts'));
+
+        return view('front.home.blog', compact('brands', 'categories', 'products', 'blogs', 'blog', 'carts'));
     }
 
     public function checkout()
