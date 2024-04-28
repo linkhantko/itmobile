@@ -26,17 +26,25 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>
-                                        <img src="{{ asset('/storage/photos/' . $order->photo) }}" alt="photo"
+                                        <img src="{{ asset('/storage/photos/' . $order->product->photo) }}" alt="photo"
                                             width="100px">
                                     </td>
-                                    <td>{{ $order->id }}</td>
-                                    <td>{{ $order->id }}</td>
-                                    <td>{{ $order->id }}</td>
-                                    <td>{{ $order->id }}</td>
-                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->product->name }}</td>
+                                    <td>{{ $order->product->brand->name }}</td>
+                                    <td>{{ $order->product->category->name }}</td>
+                                    <td>{{ $order->product->price }}</td>
+                                    <td>{{ $order->user->name }}</td>
                                     <td>
-                                        <a href="{{ url('admin/order/' . $order->id . '/edit') }}" class="text-primary"><i
-                                                class="bi bi-pencil-square"></i></a> |
+                                        <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <li><a class="dropdown-item" href="{{ 'check/' . $order->id }}"
+                                                    onclick="handleAction('check', {{ $order->id }})">Check</a></li>
+                                            <li><a class="dropdown-item" href="{{ 'confirm/' . $order->id }}"
+                                                    onclick="handleAction('confirm', {{ $order->id }})">Confirm</a></li>
+                                        </ul>
 
                                         <a href="" class="text-danger" data-bs-toggle="modal"
                                             data-bs-target="#basicModal{{ $order->id }}"><i
@@ -56,15 +64,12 @@
                                             <div class="modal-body">
                                                 Are you Sure you want to delete!
                                             </div>
-                                            <form action="{{ url('admin/order/' . $order->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <div class="modal-footer">
-                                                    <button type="reset" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </div>
-                                            </form>
+                                            <div class="modal-footer">
+                                                <button type="reset" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <a type="submit" class="btn btn-danger"
+                                                    href="{{ 'cancel/' . $order->id }}">Delete</a>
+                                            </div>
                                         </div>
                                     </div>
                                     {{-- Delete Model --}}

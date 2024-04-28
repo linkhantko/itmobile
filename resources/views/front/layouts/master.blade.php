@@ -33,7 +33,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="{{ asset('ogani-master/img/logo.png') }}" alt=""></a>
+            <a href="#"><img src="{{ asset('logo.jpg') }}" alt="" width="200"></a>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -105,12 +105,17 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
+                                                    <a class="dropdown-item" href="{{ '/history' }}">View
+                                                        History</a>
+                                                </li>
+                                                <li>
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
                                                         <button class="dropdown-item"
                                                             onclick="return confirm('Are you sure you want to logout?')">Logout</button>
                                                     </form>
                                                 </li>
+
                                             </ul>
                                         </div>
                                         <div class="dropdown p-1">
@@ -158,16 +163,15 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="/"><img src="{{ asset('ogani-master/img/logo.png') }}" alt=""></a>
+                        <a href="/"><img src="{{ asset('logo.jpg') }}" alt="" width="200"></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
                             <li><a href="/">Home</a></li>
-                            <li><a href="./shop">Shop</a></li>
-                            <li><a href="./blog">Blog</a></li>
-                            <li><a href="./contact">Contact</a></li>
+                            <li><a href="{{ '/shop' }}">Shop</a></li>
+                            <li><a href="{{ '/contact' }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -188,8 +192,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="/"><img src="{{ asset('ogani-master/img/logo.png') }}"
-                                    alt=""></a>
+                            <a href="/"><img src="{{ asset('logo.jpg') }}" alt="" width="200"></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

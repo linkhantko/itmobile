@@ -55,6 +55,20 @@ class IndexController extends Controller
         return view('front.home.shop', compact('brands', 'categories', 'products', 'carts'));
     }
 
+    public function history()
+    {
+        $brands = Brand::all();
+        $categories = Category::all();
+        $products = Product::where('status', true)->get();
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+
+        $carts = null;
+        if (auth()->check()) {
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+        }
+        return view('front.home.history', compact('brands', 'categories', 'products', 'carts', 'orders'));
+    }
+
     public function blog(string $id)
     {
         $brands = Brand::all();

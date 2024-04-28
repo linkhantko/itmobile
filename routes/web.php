@@ -22,6 +22,7 @@ Route::get('/', [IndexController::class, 'index'])->name('front.index');
 Route::get('/contact', [IndexController::class, 'contact']);
 Route::get('/shop', [IndexController::class, 'shop']);
 Route::get('/blog-detail/{id}', [IndexController::class, 'blog']);
+Route::get('/history', [IndexController::class, 'history']);
 
 Route::post('cart', [CartController::class, 'store']);
 Route::delete('cart/{id}', [CartController::class, 'destroy']);
@@ -43,6 +44,10 @@ Route::middleware(['auth', 'permission:back'])->group(function () {
     Route::resource('admin/product', ProductController::class);
     Route::resource('admin/order', OrderController::class);
     
+
+    Route::get('admin/check/{id}', [OrderController::class, 'check']);
+    Route::get('admin/confirm/{id}', [OrderController::class, 'confirm']);
+    Route::get('admin/cancel/{id}', [OrderController::class, 'cancel']);
 
     Route::resource('admin/blog', BlogController::class);
 
