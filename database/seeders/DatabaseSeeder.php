@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,9 +19,19 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        $admin = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+        ]);
+
+        Brand::insert([
+            ['name' => 'BigC'],
+            ['name' => 'Nestale'],
         ]);
 
         Category::insert([
@@ -28,5 +41,27 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Vegetables'],
             ['name' => 'Coffee'],
         ]);
+
+        $front = Permission::create([
+            'name' => 'front',
+        ]);
+
+        $back = Permission::create([
+            'name' => 'back',
+        ]);
+
+        $userRole = Role::create([
+            'name' => 'customer',
+        ]);
+
+        $adminRole = Role::create([
+            'name' => 'admin',
+        ]);
+
+        $userRole->givePermissionTo($front);
+        $adminRole->givePermissionTo($back);
+
+        $user->assignRole($userRole);
+        $admin->assignRole($adminRole);
     }
 }

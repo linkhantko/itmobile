@@ -28,7 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('brand.index', absolute: false));
+        // return redirect()->intended(route('brand.index', absolute: false));
+        if (Auth::user()->hasPermissionTo('front')) {
+            return redirect()->intended(route('front.index', false));
+        } else {
+            return redirect()->intended(route('brand.index', false));
+        }
     }
 
     /**
