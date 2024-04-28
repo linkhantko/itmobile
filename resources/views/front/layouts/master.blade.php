@@ -128,7 +128,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 @foreach ($carts as $cart)
-                                                    <li class="my-2">
+                                                    <li class="my-1">
                                                         <div class="dropdown-item d-flex align-items-center">
                                                             <a href="#" class="mx-2">
                                                                 {{ $cart->product->name }}
@@ -144,6 +144,13 @@
                                                         </div>
                                                     </li>
                                                 @endforeach
+                                                <li class="my-1">
+                                                    <div class="dropdown-item d-flex align-items-center">
+                                                        <a href="#" class="mx-2 text-primary">
+                                                            Checkout
+                                                        </a>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
