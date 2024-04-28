@@ -20,4 +20,13 @@ class IndexController extends Controller
 
         return view('front.home.index', compact('brands', 'categories', 'products', 'carts'));
     }
+
+
+    public function contact(){
+        $brands = Brand::all();
+        $categories = Category::all();
+        $products = Product::all();
+        $carts = Cart::all();
+        return view('front.home.contact', compact('brands', 'categories', 'products', 'carts'));
+    }
 }

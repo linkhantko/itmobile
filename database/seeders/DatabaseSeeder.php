@@ -30,16 +30,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Brand::insert([
-            ['name' => 'BigC'],
-            ['name' => 'Nestale'],
+            ['name' => 'Apple'],
+            ['name' => 'Samsung'],
         ]);
 
         Category::insert([
-            ['name' => 'Fresh Fruits'],
-            ['name' => 'Drink Fruits'],
-            ['name' => 'Dried Fruits'],
-            ['name' => 'Vegetables'],
-            ['name' => 'Coffee'],
+            ['name' => 'Phone'],
+            ['name' => 'Tablet'],
+            ['name' => 'PC'],
+            ['name' => 'Laptop'],
         ]);
 
         $front = Permission::create([
