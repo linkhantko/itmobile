@@ -20,7 +20,8 @@ Route::get('/', [IndexController::class, 'index'])->name('front.index');
 Route::get('/contact', [IndexController::class, 'contact']);
 Route::get('/shop', [IndexController::class, 'shop']);
 
-
+Route::post('cart', [CartController::class, 'store']);
+Route::delete('cart/{id}', [CartController::class, 'destroy']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -51,9 +52,6 @@ Route::middleware(['auth', 'permission:back'])->group(function () {
     Route::get('admin/user', [UserController::class, 'index']);
     Route::get('/admin/user/{id}/edit', [UserController::class, 'edit']);
     Route::patch('/admin/user/{id}', [UserController::class, 'update']);
-
-    Route::post('cart', [CartController::class, 'store']);
-    Route::delete('cart/{id}', [CartController::class, 'destroy']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

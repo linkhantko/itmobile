@@ -128,12 +128,22 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 @foreach ($carts as $cart)
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                            href="#">{{ $cart->product->name }}</a>
+                                                    <li class="my-2">
+                                                        <div class="dropdown-item d-flex align-items-center">
+                                                            <a href="#" class="mx-2">
+                                                                {{ $cart->product->name }}
+                                                            </a>
+                                                            <form action="{{ url('cart/' . $cart->id) }}"
+                                                                method="POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="px-1 py-0 btn btn-sm btn-danger">
+                                                                    <i class="fa fa-ban"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </li>
                                                 @endforeach
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
