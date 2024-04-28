@@ -16,13 +16,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index'])->name('front.index');
+Route::get('/contact', [IndexController::class, 'contact']);
+Route::get('/shop', [IndexController::class, 'shop']);
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'permission:back'])->group(function () {
 
     Route::resource('admin/brand', BrandController::class);
 
