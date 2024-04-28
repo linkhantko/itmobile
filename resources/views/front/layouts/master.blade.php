@@ -49,14 +49,6 @@
                 <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
-        <nav class="humberger__menu__nav mobile-menu">
-            <ul>
-                <li><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="contact">Contact</a></li>
-            </ul>
-        </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -137,8 +129,9 @@
                                                                 method="POST">
                                                                 @method('DELETE')
                                                                 @csrf
-                                                                <button type="submit" class="px-1 py-0 btn btn-sm btn-danger">
-                                                                    <i class="fa fa-ban"></i>
+                                                                <button type="submit"
+                                                                    class="px-1 py-0 btn btn-sm btn-danger">
+                                                                    <i class="fa fa-times"></i>
                                                                 </button>
                                                             </form>
                                                         </div>
@@ -160,8 +153,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}"
-                                alt=""></a>
+                        <a href="/"><img src="{{ asset('ogani-master/img/logo.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -191,7 +183,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('ogani-master/img/logo.png') }}"
+                            <a href="/"><img src="{{ asset('ogani-master/img/logo.png') }}"
                                     alt=""></a>
                         </div>
                         <ul>

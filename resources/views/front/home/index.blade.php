@@ -39,12 +39,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{{ asset('ogani-master/img/hero/banner.jpg') }}">
+                    <div class="hero__item set-bg" data-setbg="{{ asset('banner.jpg') }}">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <span>Check Here</span>
+                            <h2>Free <br />Delivery</h2>
+                            <a href="./shop" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>Featured Category</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
